@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
@@ -16,8 +14,7 @@ public class PlayerController : MonoBehaviour
     private CharacterController cc;
     private Vector3 move = new Vector3(0, 0, 0);
 
-    public float Score = 0;
-    public GameObject ScoreText;
+    public GameObject ScoreText, CoinsText;
 
     void Start()
     {
@@ -29,6 +26,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        showScore();
+        showCoins();
+
         float direction = Input.GetAxis("Horizontal");
         if (direction > 0.0f)
         {
@@ -77,6 +77,7 @@ public class PlayerController : MonoBehaviour
 
         cc.Move(move);
         transform.rotation = Quaternion.Euler(0, currentTurn * 2, 0);
+        transform.position.Set(transform.position.x, 1.09f, transform.position.z);
     }
 
     void OnCollisionEnter(Collision otherObj)
@@ -89,10 +90,14 @@ public class PlayerController : MonoBehaviour
     }
 
     
-    public void Count()
+    public void showScore()
     {
-        //Score = position.z;
-        ScoreText.GetComponent<Text>().text = "Score: " + Score.ToString();
+        ScoreText.GetComponent<Text>().text = "Score: " + this.GetComponent<PlayersScoreCounter>().getScore().ToString();
+    }
+
+    public void showCoins()
+    {
+        CoinsText.GetComponent<Text>().text = "Coins: " + this.GetComponent<PlayersScoreCounter>().getCoins().ToString();
     }
 }
 

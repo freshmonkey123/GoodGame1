@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class EngineController : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -15,12 +15,4 @@ public class Player : MonoBehaviour
     {
         
     }
-
-    void OnCollisionEnter(Collision collision)
-    {
-            Destroy(this);
-
-    }
-
-
 }

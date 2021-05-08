@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinContoller : MonoBehaviour
+public class RoadController : MonoBehaviour
 {
+    public List<GameObject> movementObjects = new List<GameObject>();
+
     void Start()
     {
         
@@ -19,9 +21,10 @@ public class CoinContoller : MonoBehaviour
         PlayersScoreCounter counter = other.gameObject.GetComponent<PlayersScoreCounter>();
         if (counter != null)
         {
-            counter.upCoins(1);
-            //Debug.Log("Score up. Current score: " + counter.getCoins());
-            Destroy(gameObject);
+            for (int i = 0; i < movementObjects.Count; i++)
+            {
+                movementObjects[i].GetComponent<EngineObsacleController>().startMove();
+            }
         }
     }
 }
